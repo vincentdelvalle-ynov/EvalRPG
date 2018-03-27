@@ -14,13 +14,14 @@ namespace EvalRpgLib.Beings
 
         public Stuff(string name)
         {
-            Name = name;
+            Name = name ?? ""; //FIX
             StatusEffects = new List<AttributEffect>();
         }
 
         public void AddAttributEffects(AttributEffect statusEffect)
         {
-            StatusEffects.Add(statusEffect);
+            if(statusEffect != null)//FIX: fixed
+                StatusEffects.Add(statusEffect);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace EvalRpgLib.Helpers
             dictionary.Add(StatisticsEnum.Stamina, unit => FuncLinear10(unit.StatManager.CurrentAttributes[AttributeEnum.Agility], unit.Level));
             dictionary.Add(StatisticsEnum.Mana, unit => FuncLinear10(unit.StatManager.CurrentAttributes[AttributeEnum.Intelligence], unit.Level));
 
-            dictionary.Add(StatisticsEnum.MagicalDamange, unit => FuncLinear2(unit.StatManager.CurrentAttributes[AttributeEnum.Intelligence], unit.Level));
+            dictionary.Add(StatisticsEnum.MagicalDamage, unit => FuncLinear2(unit.StatManager.CurrentAttributes[AttributeEnum.Intelligence], unit.Level));
             dictionary.Add(StatisticsEnum.MagicalResistance, unit => FuncLinear2(unit.StatManager.CurrentAttributes[AttributeEnum.Agility], unit.Level));
             dictionary.Add(StatisticsEnum.PhysicalDamage, unit => FuncLinear2(unit.StatManager.CurrentAttributes[AttributeEnum.Strength], unit.Level));
             dictionary.Add(StatisticsEnum.PhysicalResistance, unit => FuncLinear2(unit.StatManager.CurrentAttributes[AttributeEnum.Agility], unit.Level));

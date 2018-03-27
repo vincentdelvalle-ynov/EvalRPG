@@ -10,7 +10,7 @@ namespace EvalRpgLib.Beings
         Stamina,
         Mana,
         PhysicalDamage,
-        MagicalDamange,
+        MagicalDamage,
         PhysicalResistance,
         MagicalResistance
     }
