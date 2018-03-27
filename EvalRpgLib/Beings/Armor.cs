@@ -13,6 +13,10 @@ namespace EvalRpgLib.Beings
             :base(name)
         {
             Type = type;
+
+            if (amount < 0){ //FIX:
+                amount = 0;
+            }
             Amount = amount;
         }
 

@@ -21,7 +21,7 @@ namespace EvalRpgLib.Beings
             Dictionary<ArmorType, Armor> equipement = null,
             Weapon weapon = null)
         {
-            Name = name;
+            Name = name ?? ""; //FIX
             Equipement = equipement ?? new Dictionary<ArmorType, Armor>();
             StatManager = statManager ?? new StatManager(this, StatHelper.GetDefaultAttributes());
             Weapon = weapon;
@@ -46,16 +46,20 @@ namespace EvalRpgLib.Beings
             return StatManager.GetCurrentAttribute(attr);
         }
 
-        public void UseSkill(Skill skill, Unit target)
-        {
-            skill.Cast(target);
+        public bool UseSkill(Skill skill, Unit target)
+        {//FIX
+            if (Skills.Contains(skill))
+                return skill.Cast(target);
+            else
+                return false;
         }
 
         public bool Attack(Unit target)
         {
             if(Weapon != null)
             {
-                int damage = GetCurrentStat(Weapon.IsMagic ? StatisticsEnum.MagicalDamange : StatisticsEnum.PhysicalDamage);
+                int damage = Weapon.Damage;
+                damage += GetCurrentStat(Weapon.IsMagic ? StatisticsEnum.MagicalDamage : StatisticsEnum.PhysicalDamage);
                 target.TakeDamage(damage, Weapon.IsMagic, this);
                 return true;
             }
@@ -72,6 +76,9 @@ namespace EvalRpgLib.Beings
         /// <returns>La quantité de dégâts effectivement encaissée</returns>
         public int TakeDamage(int amount, bool isMagic, Unit caster)
         {
+            if (amount < 0)//FIX
+                return 0;
+
             amount -= GetCurrentStat( isMagic ? StatisticsEnum.MagicalResistance : StatisticsEnum.PhysicalResistance );
 
             StatManager.CurrentStatistics[StatisticsEnum.Health] -= amount;

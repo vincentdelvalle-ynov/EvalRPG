@@ -18,6 +18,7 @@ namespace EvalRpgLib.Beings
         public Skill(Unit caster)
         {
             Caster = caster;
+           
         }
 
         /// <summary>
@@ -27,6 +28,10 @@ namespace EvalRpgLib.Beings
         /// <returns>Vrai en cas de succès, sinon faux</returns>
         public bool Cast(Unit target)
         {
+            if(target == null){
+                return false;
+            }
+
             // est-ce qu'il y a suffisement de ressource ?
             if(Cost > Caster.GetCurrentStat(StatisticReference))
             {
