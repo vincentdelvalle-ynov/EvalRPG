@@ -18,3 +18,7 @@ Pour cette seconde partie, c'est l'inverse. Tout le code de la librairie est éc
 Il est possible que le code écrit ne fonctionne pas correctement. Cependant, vous ne serez pas pénalisés si les TU restent rouge. Ce qui importe, c'est de tester un maximum de choses et de manière pertinente. En revanche, vous aurez des points supplémentaires pour chaque bug identifié ET corrigé!
 
 ![UML - Being](https://github.com/vincentdelvalle-ynov/EvalRPG/blob/master/Beings%20-%20Class%20Diagram.png)
+
+## Comment rendre l'évaluation ?
+
+Vous pouvez rendre votre travail à travers un *[pull-request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)*, ou bien par *e-mail*.
