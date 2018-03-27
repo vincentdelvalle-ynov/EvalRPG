@@ -7,7 +7,7 @@ namespace EvalRpgLib.World
     public enum DirectionEnum
     {
         North,
-        Est,
+        East,
         West,
         South
     }
