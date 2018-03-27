@@ -43,6 +43,5 @@ namespace EvalRpgTests
             });
             Assert.AreEqual(9, counter);
         }
-
     }
 }

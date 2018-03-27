@@ -26,22 +26,29 @@ namespace EvalRpgLib.World
         public Map() : this(WIDTH, HEIGHT) { }
 
         /// <summary>
-        /// Constructeur présisant la taille de la carte
+        /// Constructeur précisant la taille de la carte
         /// </summary>
         /// <param name="width">Largeur spécifique de la carte</param>
         /// <param name="height">Hauteur spécifique de la carte</param>
         public Map(int width, int height)
         {
-            // TODO création de la matrice
 
-            // TODO création de chaque élément
+            // DONE création de la matrice
+            Matrix = new MapElement[height, width];
 
-            // TODO récupération des éléments voisins pour chaque élément
-            
+            // DONE création de chaque élément
+            Matrix.ForEachWithIndexes((i, j) => {
+                Matrix[i, j] = new MapElement(this, j, i);
+            });
+
+            // DONE récupération des éléments voisins pour chaque élément
+            Matrix.ForEachWithIndexes((i, j) => {
+                Matrix[i, j].SearchNeighbors();
+            });
         }
 
         /// <summary>
-        /// Assès simplifier et sécurisé aux éléments de la carte, à privilégier par rapport à la matrice.
+        /// Acsès simplifier et sécurisé aux éléments de la carte, à privilégier par rapport à la matrice.
         /// </summary>
         /// <param name="i">Position en i (= numéro de ligne = Y)</param>
         /// <param name="j">Position en j (= numéro de colonne = X)</param>
@@ -69,10 +76,17 @@ namespace EvalRpgLib.World
         /// <returns>Vrai si dans l'intervale, sino faux</returns>
         public bool IndexesInMatrix(int i, int j)
         {
-            // TODO
-            return false;
+            if (i >= Matrix.GetLength(0) || i < 0)
+            {
+                return false;
+            }
+            if (j >= Matrix.GetLength(1) || j < 0)
+            {
+                return false;
+            }
+            return true;
         }
-
+        //DONE
 
 
 

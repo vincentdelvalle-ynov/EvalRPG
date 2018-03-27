@@ -1,6 +1,7 @@
 ﻿using EvalRpgLib.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace EvalRpgLib.World
@@ -40,7 +41,13 @@ namespace EvalRpgLib.World
         /// <param name="y">Position en Y de l'élément</param>
         public MapElement(Map map, int x, int y)
         {
-            // TODO
+            this.Neighbors = new Dictionary<DirectionEnum, MapElement>();
+            this.ContentList = new List<IMapContent>();
+            this.Map = map;
+            this.X = x;
+            this.Y = y;
+
+            // DONE
         }
 
         /// <summary>
@@ -48,7 +55,19 @@ namespace EvalRpgLib.World
         /// </summary>
         public void SearchNeighbors()
         {
-            // TODO
+            MapElement temp = GetNeighbour(DirectionEnum.North);
+            Neighbors.Add(DirectionEnum.North, temp);
+
+            temp = GetNeighbour(DirectionEnum.West);
+            Neighbors.Add(DirectionEnum.West, temp);
+
+            temp = GetNeighbour(DirectionEnum.South);
+            Neighbors.Add(DirectionEnum.South, temp);
+
+            temp = GetNeighbour(DirectionEnum.Est);
+            Neighbors.Add(DirectionEnum.Est, temp);
+
+            // DONE
         }
 
         /// <summary>
@@ -58,8 +77,37 @@ namespace EvalRpgLib.World
         /// <returns>Un élément de carte, null si aucun voisin</returns>
         public MapElement GetNeighbour(DirectionEnum direction)
         {
-            // TODO
+            int[] offset = MapHelper.GetDirectionOffset(direction);
+
+            try
+            {
+                return Map[Y+offset[1], X+offset[0]];
+
+            }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             return null;
+            //switch (direction)
+            //{
+            //    case DirectionEnum.North:
+            //        return Map[X, Y - 1];
+            //    break;
+
+            //    case DirectionEnum.West:
+            //        return Map[X-1,Y];
+            //    break;
+
+            //    case DirectionEnum.South:
+            //        return Map[X, Y +1];
+            //    break;
+
+            //    case DirectionEnum.Est:
+            //        return Map[X+1 , Y];
+            //    break;
+            //}
+            //// DONE
+            //return null;
         }
 
         /// <summary>
@@ -68,7 +116,19 @@ namespace EvalRpgLib.World
         /// <param name="content">Le contenu à ajouter</param>
         public void AddContent(IMapContent content)
         {
-            // TODO
+            if (content == null)
+            {
+                return;
+            }
+            if (content.Location != null)
+            {
+                content.Location.ContentList.Clear();
+            }
+            content.Location = this;
+            ContentList.Add(content);
+
+            //DONE
+
         }
 
         /// <summary>
@@ -77,7 +137,8 @@ namespace EvalRpgLib.World
         /// <param name="content">Le contenu à retirer</param>
         public void RemoveContent(IMapContent content)
         {
-            // TODO
+            content.Location.ContentList.Clear();
+            //DONE
         }
 
 

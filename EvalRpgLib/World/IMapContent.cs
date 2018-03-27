@@ -6,7 +6,7 @@ namespace EvalRpgLib.World
 {
 
     /// <summary>
-    /// Interface servant a définir ce qui est être placé dans une carte
+    /// Interface servant a définir ce qui est à être placé dans une carte
     /// </summary>
     public interface IMapContent
     {
