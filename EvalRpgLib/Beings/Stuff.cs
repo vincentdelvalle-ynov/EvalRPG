@@ -20,7 +20,10 @@ namespace EvalRpgLib.Beings
 
         public void AddAttributEffects(AttributEffect statusEffect)
         {
-            StatusEffects.Add(statusEffect);
+            if (statusEffect != null)
+            {
+                StatusEffects.Add(statusEffect);
+            }
         }
     }
 }

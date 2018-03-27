@@ -56,8 +56,11 @@ namespace EvalRpgLib.Beings
 
             // prise en compte de tous les effets de l'équipement de l'unité
             List<Stuff> allEquipedStuff = Unit.Equipement.Select(x => (Stuff)x.Value).ToList();
-            allEquipedStuff.Add(Unit.Weapon);
-            foreach(var item in allEquipedStuff)
+            if (Unit.Weapon != null)
+            {
+                allEquipedStuff.Add(Unit.Weapon);
+            }
+            foreach (var item in allEquipedStuff)
             {
                 foreach (AttributEffect attributEffect in item.StatusEffects)
                 {
@@ -80,6 +83,23 @@ namespace EvalRpgLib.Beings
 
             // répercution sur les caractéristiques courantes
             CurrentStatistics.Clear();
+            foreach (var function in StatisticsComputer)
+            {
+                CurrentStatistics.AddOrIncrement(function.Key, function.Value(Unit));
+            }
+
+            // Prise en compte des dommages de l'arme
+            if (Unit.Weapon != null)
+            {
+                StatisticsEnum statistics = Unit.Weapon.IsMagic ? StatisticsEnum.MagicalDamange : StatisticsEnum.PhysicalDamage;
+                CurrentStatistics.AddOrIncrement(statistics, Unit.Weapon.Damage);
+            }
+
+
+            foreach (var item in Unit.Buff)
+            {
+                CurrentStatistics.AddOrIncrement(item.Key, item.Value);
+            };
         }
 
         /// <summary>
