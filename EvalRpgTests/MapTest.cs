@@ -36,7 +36,7 @@ namespace EvalRpgTests
         public void TestMapIndexesInMatrixOK()
         {
             Map map = new Map(5, 10);
-
+            
             Assert.IsTrue(map.IndexesInMatrix(0, 0));
             Assert.IsTrue(map.IndexesInMatrix(1, 1));
             Assert.IsTrue(map.IndexesInMatrix(1, 4));

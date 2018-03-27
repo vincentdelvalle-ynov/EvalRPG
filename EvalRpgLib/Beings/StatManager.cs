@@ -73,13 +73,15 @@ namespace EvalRpgLib.Beings
         {
             // calcul de toutes les caractéristiques de base
             BaseStatistics.Clear();
+            CurrentStatistics.Clear();
             foreach (var function in StatisticsComputer)
             {
                 BaseStatistics.Add(function.Key, function.Value(Unit));
+                CurrentStatistics.Add(function.Key, function.Value(Unit));
             }
 
             // répercution sur les caractéristiques courantes
-            CurrentStatistics.Clear();
+            
         }
 
         /// <summary>
