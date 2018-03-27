@@ -33,11 +33,19 @@ namespace EvalRpgLib.World
         public Map(int width, int height)
         {
             // TODO création de la matrice
+            Matrix = new MapElement[height, width];
 
             // TODO création de chaque élément
-
+            Matrix.ForEachWithIndexes((i, j) =>
+            {
+                Matrix[i, j] = new MapElement(this, i, j);
+            });
             // TODO récupération des éléments voisins pour chaque élément
-            
+            Matrix.ForEachWithElement((x) =>
+            {
+                x.SearchNeighbors();
+            });
+
         }
 
         /// <summary>
@@ -69,8 +77,14 @@ namespace EvalRpgLib.World
         /// <returns>Vrai si dans l'intervale, sino faux</returns>
         public bool IndexesInMatrix(int i, int j)
         {
-            // TODO
-            return false;
+            if (i >= 0 && i < Matrix.GetLength(0) && j >= 0 && j < Matrix.GetLength(1))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

@@ -13,9 +13,15 @@ namespace EvalRpgLib.Helpers
         /// <typeparam name="T">Type contenu dans le tableau à deux entrées</typeparam>
         /// <param name="matrix">Le tableau à parcourir</param>
         /// <param name="action">L'action à appeler</param>
-        public static void ForEachWithIndexes<T>(this T[,] matrix, Action<int,int> action)
+        public static void ForEachWithIndexes<T>(this T[,] matrix, Action<int, int> action)
         {
-            // TODO
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    action(i, j);
+                }
+            }
         }
 
         /// <summary>
@@ -26,7 +32,9 @@ namespace EvalRpgLib.Helpers
         /// <param name="action">L'action à appeler</param>
         public static void ForEachWithElement<T>(this T[,] matrix, Action<T> action)
         {
-            // TODO
+            matrix.ForEachWithIndexes((i, j) => {
+                action(matrix[i, j]);
+            });
         }
 
         /// <summary>

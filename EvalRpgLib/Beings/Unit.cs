@@ -9,6 +9,7 @@ namespace EvalRpgLib.Beings
     {
         public string Name { get; set; }
         public Dictionary<ArmorType, Armor> Equipement { get; set; }
+        public Dictionary<StatisticsEnum, int> Buff { get; set; }
         public StatManager StatManager { get; set; }
         public Weapon Weapon { get; set; }
         public List<Stuff> Bag { get; set; }
@@ -23,6 +24,7 @@ namespace EvalRpgLib.Beings
         {
             Name = name;
             Equipement = equipement ?? new Dictionary<ArmorType, Armor>();
+            Buff = new Dictionary<StatisticsEnum, int>();
             StatManager = statManager ?? new StatManager(this, StatHelper.GetDefaultAttributes());
             Weapon = weapon;
 
@@ -74,7 +76,15 @@ namespace EvalRpgLib.Beings
         {
             amount -= GetCurrentStat( isMagic ? StatisticsEnum.MagicalResistance : StatisticsEnum.PhysicalResistance );
 
-            StatManager.CurrentStatistics[StatisticsEnum.Health] -= amount;
+            if (StatManager.CurrentStatistics[StatisticsEnum.Health] > amount)
+            {
+                StatManager.CurrentStatistics[StatisticsEnum.Health] -= amount;
+            }
+            else
+            {
+                amount = StatManager.CurrentStatistics[StatisticsEnum.Health];
+                StatManager.CurrentStatistics[StatisticsEnum.Health] = 0;
+            }
 
             return amount;
         }
