@@ -27,9 +27,9 @@ namespace EvalRpgLib.Helpers
         {
             return new Dictionary<AttributeEnum, int>
             {
-                { AttributeEnum.Strength, 0 },
-                { AttributeEnum.Agility, 0 },
-                { AttributeEnum.Intelligence, 0 },
+                { AttributeEnum.Strength, 10 },
+                { AttributeEnum.Agility, 10 },
+                { AttributeEnum.Intelligence, 10 },
             };
         }
 

@@ -20,10 +20,10 @@ namespace EvalRpgTests
 
             Assert.IsNull(element.Neighbors[DirectionEnum.North]);
             Assert.IsNull(element.Neighbors[DirectionEnum.West]);
-            Assert.IsNotNull(element.Neighbors[DirectionEnum.Est]);
+            Assert.IsNotNull(element.Neighbors[DirectionEnum.East]);
             Assert.IsNotNull(element.Neighbors[DirectionEnum.South]);
 
-            Assert.AreEqual(map[0, 1], element.Neighbors[DirectionEnum.Est]);
+            Assert.AreEqual(map[0, 1], element.Neighbors[DirectionEnum.East]);
             Assert.AreEqual(map[1, 0], element.Neighbors[DirectionEnum.South]);
         }
 
@@ -36,7 +36,7 @@ namespace EvalRpgTests
 
             Assert.IsNotNull(element.Neighbors[DirectionEnum.North]);
             Assert.IsNotNull(element.Neighbors[DirectionEnum.West]);
-            Assert.IsNull(element.Neighbors[DirectionEnum.Est]);
+            Assert.IsNull(element.Neighbors[DirectionEnum.East]);
             Assert.IsNull(element.Neighbors[DirectionEnum.South]);
 
             Assert.AreEqual(map[1, 2], element.Neighbors[DirectionEnum.North]);
@@ -52,12 +52,12 @@ namespace EvalRpgTests
 
             Assert.IsNotNull(element.Neighbors[DirectionEnum.North]);
             Assert.IsNotNull(element.Neighbors[DirectionEnum.West]);
-            Assert.IsNotNull(element.Neighbors[DirectionEnum.Est]);
+            Assert.IsNotNull(element.Neighbors[DirectionEnum.East]);
             Assert.IsNotNull(element.Neighbors[DirectionEnum.South]);
 
             Assert.AreEqual(map[0, 1], element.Neighbors[DirectionEnum.North]);
             Assert.AreEqual(map[1, 0], element.Neighbors[DirectionEnum.West]);
-            Assert.AreEqual(map[1, 2], element.Neighbors[DirectionEnum.Est]);
+            Assert.AreEqual(map[1, 2], element.Neighbors[DirectionEnum.East]);
             Assert.AreEqual(map[2, 1], element.Neighbors[DirectionEnum.South]);
         }
 

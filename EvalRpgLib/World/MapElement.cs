@@ -40,7 +40,11 @@ namespace EvalRpgLib.World
         /// <param name="y">Position en Y de l'élément</param>
         public MapElement(Map map, int x, int y)
         {
-            // TODO
+            Map = map;
+            Neighbors = new Dictionary<DirectionEnum, MapElement>();
+            ContentList = new List<IMapContent>();
+            X = x;
+            Y = y;
         }
 
         /// <summary>
@@ -48,7 +52,10 @@ namespace EvalRpgLib.World
         /// </summary>
         public void SearchNeighbors()
         {
-            // TODO
+            foreach(DirectionEnum direction in Enum.GetValues(typeof(DirectionEnum)))
+            {
+                Neighbors.Add(direction, GetNeighbour(direction));
+            }
         }
 
         /// <summary>
@@ -58,8 +65,19 @@ namespace EvalRpgLib.World
         /// <returns>Un élément de carte, null si aucun voisin</returns>
         public MapElement GetNeighbour(DirectionEnum direction)
         {
-            // TODO
-            return null;
+            switch(direction)
+            {
+                case DirectionEnum.North:
+                    return Map[X - 1, Y];
+                case DirectionEnum.East:
+                    return Map[X, Y + 1];
+                case DirectionEnum.South:
+                    return Map[X + 1, Y];
+                case DirectionEnum.West:
+                    return Map[X, Y - 1];
+                default:
+                    return null;
+            }
         }
 
         /// <summary>
@@ -68,16 +86,23 @@ namespace EvalRpgLib.World
         /// <param name="content">Le contenu à ajouter</param>
         public void AddContent(IMapContent content)
         {
-            // TODO
+            if (content != null)
+            {
+                if (content.Location != null)
+                    content.Location.RemoveContent(content);
+                content.Location = this;
+                this.ContentList.Add(content);
+            }
         }
-
+        
         /// <summary>
         /// Retire un contenu à cette position
         /// </summary>
         /// <param name="content">Le contenu à retirer</param>
         public void RemoveContent(IMapContent content)
         {
-            // TODO
+            if(content != null)
+                this.ContentList.Remove(content);
         }
 
 

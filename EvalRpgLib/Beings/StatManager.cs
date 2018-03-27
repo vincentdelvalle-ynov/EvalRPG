@@ -57,13 +57,19 @@ namespace EvalRpgLib.Beings
             // prise en compte de tous les effets de l'équipement de l'unité
             List<Stuff> allEquipedStuff = Unit.Equipement.Select(x => (Stuff)x.Value).ToList();
             allEquipedStuff.Add(Unit.Weapon);
-            foreach(var item in allEquipedStuff)
+            if(allEquipedStuff.Count != 0)
             {
-                foreach (AttributEffect attributEffect in item.StatusEffects)
+                foreach (Stuff item in allEquipedStuff)
                 {
-                    CurrentAttributes.AddOrIncrement(attributEffect.Attribute, attributEffect.Value);
+                    if(item != null)
+                    {
+                        foreach (AttributEffect attributEffect in item.StatusEffects)
+                        {
+                            CurrentAttributes.AddOrIncrement(attributEffect.Attribute, attributEffect.Value);
+                        }
+                    }
                 }
-            }
+            }            
         }
 
         /// <summary>
@@ -80,6 +86,10 @@ namespace EvalRpgLib.Beings
 
             // répercution sur les caractéristiques courantes
             CurrentStatistics.Clear();
+            foreach (StatisticsEnum stat in Enum.GetValues(typeof(StatisticsEnum)))
+            {
+                CurrentStatistics.Add(stat, StatisticsComputer[stat](Unit));
+            }
         }
 
         /// <summary>

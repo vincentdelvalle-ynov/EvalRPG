@@ -29,6 +29,8 @@ namespace EvalRpgLib.Beings
             Bag = new List<Stuff>();
             Skills = new List<Skill>();
             Level = 1;
+
+            
         }
 
         public void UpdateStats()
@@ -74,8 +76,8 @@ namespace EvalRpgLib.Beings
         {
             amount -= GetCurrentStat( isMagic ? StatisticsEnum.MagicalResistance : StatisticsEnum.PhysicalResistance );
 
+            int actual = StatManager.GetCurrentStatistic(StatisticsEnum.Health);
             StatManager.CurrentStatistics[StatisticsEnum.Health] -= amount;
-
             return amount;
         }
 
